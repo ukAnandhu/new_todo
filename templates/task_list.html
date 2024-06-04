@@ -1,55 +1,25 @@
-{% extends "base.html" %} 
-
-{% block content %}
-
-<div class="todo-container">
-  <div class="todo-search">
-    <form action="" method="POST">
-     
-      {% comment %} <input type="text" placeholder="Enter Todo" /> {% endcomment %}
-      {% csrf_token %}
-      {{form.title}}
-      <button>Add</button>
-    </form>
-  </div>
-
-  <div class="todo-list">
-    
-    
-    {% for task in tasks %}
-
-    <div class="todo-list-item">
-      <div class="task">
-        <input type="checkbox" />
-        <p>{{task.title}}</p>
-      </div>
-
-      <div class="btn-container">
-        <div class="edit">
-          <a href="{% url 'task-update' task.id %}">
-            <i class="fa-solid fa-pen-to-square"></i>
-          </a>
-        </div>
-        <div class="del">
-          <a href="{% url 'task-delete' task.id %}">
-            <i class="fa-solid fa-trash-can"></i>
-          </a>
-        </div>
-      </div>
+{% extends 'base.html' %}
+{% block body %}
+<div class="container m-auto mt-5">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <h2 class="header">Todo List</h2>
+            <a href="{% url 'tasks' %}" class="btn btn-success">Add Todo</a>
+            {% for i in task1 %}
+            <div class="card mt-5">
+              <div class="card-body">
+                <h5 class="card-title ">{{i.name}}</h5>
+                  <p><b>{{i.priority}}</b></p>
+                  <p><b>{{i.date}}</b></p>
+                  <a href="{% url 'task_delete' i.id %}" class="btn btn-danger">Done</a>
+                  <a href="{% url 'task_update' i.id %}" class="btn btn-success">Update</a>
+              </div> 
+            </div>
+            {% endfor %}
+            <br />   
+          </div>
     </div>
-      
-    {% endfor %}
-      
-   
-
-
-
-
-
-   
-
- 
-  </div>
 </div>
 
-{% endblock content %}
+
+{% endblock %}

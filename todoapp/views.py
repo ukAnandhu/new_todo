@@ -3,33 +3,32 @@ from .models import Task
 from .forms import TaskForm
 
 # Create your views here.
-def task_list(request):
-    tasks = Task.objects.all()
-    form = TaskForm()
-    if request.method=='POST':
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("task-list")
-    context = {"tasks":tasks, "form": form}
-    return render(request, "task_list.html", context)
+def tasks(req):
+    return render(req,'tasks.html')
 
-def task_update(request, pk):
-    task = Task.objects.get(id=pk)
-    form = TaskForm(instance=task)
-    if request.method == 'POST':
-        form = TaskForm(request.POST, instance=task)
-        if form.is_valid():
-            form.save()
-            return redirect("task-list")
-            
-    context = {"form": form}
-    return render(request, "task_list.html", context)
+def task_list(req):
+    task1 = Task.objects.all()
+    if req.method == 'POST':
+        name = req.POST.get('task','')
+        priority = req.POST.get('priority','')
+        date = req.POST.get('date','')
+        task = Task(name=name,priority=priority,date=date)
+        task.save()
 
-def task_delete(request, pk):
-    task = Task.objects.get(id=pk)
-    if request.method == 'POST':
+    return render(req, "task_list.html",{'task1':task1})
+
+
+def task_update(req,id):
+    task = Task.objects.get(id = id)
+    f = TaskForm(req.POST or None,instance = task)
+    if f.is_valid():
+        f.save()
+        return redirect('/')
+    return render(req,'task_update.html',{'f':f,'task':task})
+
+def task_delete(req,id):
+    task = Task.objects.get(id = id)
+    if req.method == 'POST':
         task.delete()
-        return redirect("task-list")
-    context = {"task": task}
-    return render(request, "task_delete.html", context)
+        return redirect('task_list')
+    return render(req,'task_delete.html',{'task':task})

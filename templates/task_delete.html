@@ -1,22 +1,25 @@
 {% extends "base.html" %}
 
 
-{% block content %}
+{% block body %}
 
-<div class="delete-container">
-    <p>Are you sure want to delete</p>
-    <h4>"{{task.title}}"</h4>
-    <div class="btn-container">
-        <a href="{% url 'task-list' %}">
-            <button class="btn-cancel">Cancel</button>
-        </a>
+<div class="container text-center mt-5">
+
+    <p class="text">Are you sure want to delete <b>"{{task.name}}"</b></p>
+    
+    <div class="container">
+        
+        
         <form action="" method='POST'>
             {% csrf_token %}
-            <button class="btn-delete">Delete</button>
+            <a href="{% url 'task_list' %}">
+                <button class="btn btn-primary">Cancel</button>
+            </a>
+            <button class="btn btn-danger">Delete</button>
         </form>
        
     </div>
 </div>
     
-{% endblock content %}
+{% endblock %}
     

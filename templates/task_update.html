@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 m-auto mt-5">
+            <form action="{% url 'task_list' %}" method="post">
+                {% csrf_token %} {{f.as_p}}
+                <button  class="btn btn-primary" type="submit">Confirm</button>
+            </form>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock %}
