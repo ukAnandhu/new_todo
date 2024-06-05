@@ -10,3 +10,17 @@
     font-size: 24px;
     font-weight: 600;
 }
+.card {
+    /* Basic styling for the card */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    /* Styles for when the card is hovered */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }

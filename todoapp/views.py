@@ -3,8 +3,6 @@ from .models import Task
 from .forms import TaskForm
 
 # Create your views here.
-def tasks(req):
-    return render(req,'tasks.html')
 
 def task_list(req):
     task1 = Task.objects.all()
